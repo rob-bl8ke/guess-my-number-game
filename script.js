@@ -14,6 +14,8 @@ document.querySelector('button.btn.check').addEventListener('click', () => {
     } else if (guess === secretNumber) {
         // player wins
         document.querySelector('.message').textContent = '🎉 Correct number!'
+        document.querySelector('body').style.backgroundColor = '#60b347';
+        document.querySelector('.number').style.width = '30rem'
     } else if (guess > secretNumber) {
         // guess is too high, lower score
         if (score > 1) {
