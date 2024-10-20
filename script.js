@@ -8,13 +8,14 @@ document.querySelector('.score').textContent = score;
 
 document.querySelector('button.btn.check').addEventListener('click', () => {
     const guess = Number(document.querySelector('input.guess').value);
-    // console.log(guess, typeof guess);
     
     if (!guess) {
         document.querySelector('.message').textContent = '⛔ No number!'
     } else if (guess === secretNumber) {
+        // player wins
         document.querySelector('.message').textContent = '🎉 Correct number!'
     } else if (guess > secretNumber) {
+        // guess is too high, lower score
         if (score > 1) {
             document.querySelector('.message').textContent = '📈 Too high!'
             score--;
@@ -25,6 +26,7 @@ document.querySelector('button.btn.check').addEventListener('click', () => {
             document.querySelector('.score').textContent = score;
         }
     } else if (guess < secretNumber) {
+        // guess is too low, lower score
         if (score > 1) {
             document.querySelector('.message').textContent = '📉 Too low!'
             score--;
