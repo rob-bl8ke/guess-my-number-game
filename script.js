@@ -1,21 +1,38 @@
 'use strict';
 
-// Windows + . to open emoji window...
+const secretNumber = Math.trunc(Math.random() * 20) + 1;
+document.querySelector('div.number').textContent = secretNumber;
 
-// text element div, span uses 'textContent'
-console.log(document.querySelector('.message').textContent);
-document.querySelector('.message').textContent = 'Correct Number! 🎉';
-console.log(document.querySelector('.message').textContent);
-document.querySelector('.message').textContent = 'Incorrect Number! 🎉';
-console.log(document.querySelector('.message').textContent);
+let score = 20;
+document.querySelector('.score').textContent = score;
 
-console.log(document.querySelector('.number').textContent);
-document.querySelector('.number').textContent = 13;
-console.log(document.querySelector('.score').textContent);
-document.querySelector('.score').textContent = 10;
-
-// input uses 'value'
-document.querySelector('main section input.guess').value = 15;
-console.log(document.querySelector('main section input.guess').value);
-document.querySelector('input.guess').value = 22;
-console.log(document.querySelector('input.guess').value);
+document.querySelector('button.btn.check').addEventListener('click', () => {
+    const guess = Number(document.querySelector('input.guess').value);
+    // console.log(guess, typeof guess);
+    
+    if (!guess) {
+        document.querySelector('.message').textContent = '⛔ No number!'
+    } else if (guess === secretNumber) {
+        document.querySelector('.message').textContent = '🎉 Correct number!'
+    } else if (guess > secretNumber) {
+        if (score > 1) {
+            document.querySelector('.message').textContent = '📈 Too high!'
+            score--;
+            document.querySelector('.score').textContent = score;
+        } else {
+            document.querySelector('.message').textContent = '💥 You lost the game!'
+            score = 0;
+            document.querySelector('.score').textContent = score;
+        }
+    } else if (guess < secretNumber) {
+        if (score > 1) {
+            document.querySelector('.message').textContent = '📉 Too low!'
+            score--;
+            document.querySelector('.score').textContent = score;
+        } else {
+            document.querySelector('.message').textContent = '💥 You lost the game!'
+            score = 0;
+            document.querySelector('.score').textContent = score;
+        }
+    }
+});
